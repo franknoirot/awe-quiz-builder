@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_quiz_questions",
+  "info": {
+    "name": "question",
+    "icon": "question"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "vertical_cards",
+        "checkboxes"
+      ]
+    }
+  }
+}

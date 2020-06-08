@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "answers",
+  "info": {
+    "name": "Answer"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "answer_metrics": {
+      "type": "dynamiczone",
+      "components": [
+        "metrics.myers-briggs"
+      ]
+    },
+    "question": {
+      "via": "answers",
+      "model": "question"
+    }
+  }
+}

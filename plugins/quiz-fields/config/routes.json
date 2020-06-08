@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/",
+      "handler": "quiz-fields.index",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

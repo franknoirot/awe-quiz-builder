@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": {
+    "name": "Question"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "answers": {
+      "collection": "answer",
+      "via": "question"
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "vertical_cards",
+        "checkboxes"
+      ],
+      "default": "checkboxes"
+    },
+    "quiz": {
+      "model": "quiz",
+      "via": "questions"
+    },
+    "slug": {
+      "type": "string",
+      "unique": true,
+      "regex": "[\\w\\d-]+",
+      "required": true
+    }
+  }
+}
