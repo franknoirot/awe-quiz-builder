@@ -36,6 +36,12 @@
       "unique": true,
       "regex": "[\\w\\d-]+",
       "required": true
+    },
+    "answer_width": {
+      "type": "string"
+    },
+    "answer_gap": {
+      "type": "string"
     }
   }
 }
