@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": {
+    "name": "Question"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "answers": {
+      "collection": "answer",
+      "via": "question"
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "vertical_cards",
+        "checkboxes"
+      ],
+      "default": "checkboxes"
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "answer_width": {
+      "type": "string",
+      "default": "40%"
+    },
+    "answer_gap": {
+      "type": "string",
+      "default": "2.5%"
+    },
+    "quiz": {
+      "via": "questions",
+      "model": "quiz"
+    }
+  }
+}

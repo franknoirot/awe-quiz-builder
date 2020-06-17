@@ -1,0 +1,45 @@
+{
+  "collectionName": "components_metrics_myers_briggs",
+  "info": {
+    "name": "Myers Briggs",
+    "icon": "balance-scale-left"
+  },
+  "options": {},
+  "attributes": {
+    "mind": {
+      "type": "decimal",
+      "default": 0,
+      "required": true,
+      "max": 1,
+      "min": -1
+    },
+    "energy": {
+      "type": "decimal",
+      "default": 0,
+      "required": true,
+      "max": 1,
+      "min": -1
+    },
+    "nature": {
+      "type": "decimal",
+      "default": 0,
+      "required": true,
+      "max": 1,
+      "min": -1
+    },
+    "tactics": {
+      "type": "decimal",
+      "default": 0,
+      "required": true,
+      "max": 1,
+      "min": -1
+    },
+    "identity": {
+      "type": "decimal",
+      "default": 0,
+      "required": true,
+      "max": 1,
+      "min": -1
+    }
+  }
+}
