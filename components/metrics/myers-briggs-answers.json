@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_metrics_myers_briggs_answers",
+  "info": {
+    "name": "myers-briggs-answers",
+    "icon": "balance-scale"
+  },
+  "options": {},
+  "attributes": {
+    "mind": {
+      "collection": "answer"
+    },
+    "energy": {
+      "collection": "answer"
+    },
+    "nature": {
+      "collection": "answer"
+    },
+    "tactics": {
+      "collection": "answer"
+    },
+    "identity": {
+      "collection": "answer"
+    }
+  }
+}

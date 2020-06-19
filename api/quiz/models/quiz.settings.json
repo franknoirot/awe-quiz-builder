@@ -15,12 +15,29 @@
       "unique": true
     },
     "questions": {
-      "collection": "question",
-      "via": "quiz"
+      "via": "quiz",
+      "collection": "question"
     },
     "results": {
-      "collection": "result",
-      "via": "quiz"
+      "via": "quiz",
+      "collection": "result"
+    },
+    "interstitials": {
+      "via": "quiz",
+      "collection": "interstitial"
+    },
+    "results_metrics": {
+      "type": "dynamiczone",
+      "components": [
+        "metrics.myers-briggs-results"
+      ],
+      "max": 1
+    },
+    "custom_styles": {
+      "type": "dynamiczone",
+      "components": [
+        "styling.style-rule"
+      ]
     }
   }
 }

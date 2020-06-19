@@ -1,25 +1,21 @@
 {
   "kind": "collectionType",
-  "collectionName": "results",
+  "collectionName": "charities",
   "info": {
-    "name": "Result"
+    "name": "Charity"
   },
   "options": {
     "increments": true,
     "timestamps": true
   },
   "attributes": {
-    "result_name": {
+    "charity_name": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "description": {
-      "type": "richtext"
-    },
-    "quiz": {
-      "model": "quiz",
-      "via": "results"
+    "amount_raised": {
+      "type": "string"
     }
   }
 }
