@@ -38,11 +38,6 @@
       "components": [
         "styling.style-rule"
       ]
-    },
-    "style_rules": {
-      "type": "component",
-      "repeatable": true,
-      "component": "styling.style-rule"
     }
   }
 }
