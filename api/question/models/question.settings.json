@@ -43,20 +43,6 @@
     "quiz": {
       "via": "questions",
       "model": "quiz"
-<<<<<<< HEAD
-    },
-    "answer_metrics": {
-      "type": "dynamiczone",
-      "components": [
-        "metrics.myers-briggs-answers",
-        "metrics.charity"
-      ]
-    },
-    "image_aspect_ratio": {
-      "type": "string",
-      "default": "100%"
-=======
->>>>>>> parent of b977c51... added interstitials, charities, etc
     }
   }
 }

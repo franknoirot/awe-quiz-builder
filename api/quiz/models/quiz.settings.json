@@ -21,26 +21,6 @@
     "results": {
       "collection": "result",
       "via": "quiz"
-<<<<<<< HEAD
-    },
-    "interstitials": {
-      "collection": "interstitial",
-      "via": "quiz"
-    },
-    "results_metrics": {
-      "type": "dynamiczone",
-      "components": [
-        "metrics.myers-briggs-results"
-      ],
-      "max": 1
-    },
-    "custom_styles": {
-      "type": "dynamiczone",
-      "components": [
-        "styling.style-rule"
-      ]
-=======
->>>>>>> parent of b977c51... added interstitials, charities, etc
     }
   }
 }
