@@ -21,6 +21,7 @@
     "results": {
       "collection": "result",
       "via": "quiz"
+<<<<<<< HEAD
     },
     "interstitials": {
       "collection": "interstitial",
@@ -38,6 +39,8 @@
       "components": [
         "styling.style-rule"
       ]
+=======
+>>>>>>> parent of b977c51... added interstitials, charities, etc
     }
   }
 }

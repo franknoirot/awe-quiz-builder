@@ -17,6 +17,13 @@
     "description": {
       "type": "richtext"
     },
+    "result_metrics": {
+      "type": "dynamiczone",
+      "components": [
+        "metrics.myers-briggs"
+      ],
+      "max": 1
+    },
     "quiz": {
       "via": "results",
       "model": "quiz"
