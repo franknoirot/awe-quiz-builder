@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "interstitials",
+  "info": {
+    "name": "Interstitial"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "icon",
+        "tall_image"
+      ],
+      "default": "icon"
+    },
+    "transition": {
+      "type": "enumeration",
+      "enum": [
+        "fade",
+        "slide_bottom"
+      ],
+      "default": "fade"
+    },
+    "quiz": {
+      "model": "quiz",
+      "via": "interstitials"
+    },
+    "position": {
+      "type": "dynamiczone",
+      "components": [
+        "interstitial.relative-to-question",
+        "interstitial.absolute"
+      ],
+      "max": 1
+    },
+    "slug": {
+      "type": "string",
+      "regex": "[\\w\\d-]",
+      "required": true,
+      "unique": true
+    }
+  }
+}
