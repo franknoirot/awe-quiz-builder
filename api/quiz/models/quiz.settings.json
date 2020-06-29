@@ -15,16 +15,16 @@
       "unique": true
     },
     "questions": {
-      "via": "quiz",
-      "collection": "question"
+      "collection": "question",
+      "via": "quiz"
     },
     "results": {
-      "via": "quiz",
-      "collection": "result"
+      "collection": "result",
+      "via": "quiz"
     },
     "interstitials": {
-      "via": "quiz",
-      "collection": "interstitial"
+      "collection": "interstitial",
+      "via": "quiz"
     },
     "results_metrics": {
       "type": "dynamiczone",
@@ -38,6 +38,11 @@
       "components": [
         "styling.style-rule"
       ]
+    },
+    "style_rules": {
+      "type": "component",
+      "repeatable": true,
+      "component": "styling.style-rule"
     }
   }
 }

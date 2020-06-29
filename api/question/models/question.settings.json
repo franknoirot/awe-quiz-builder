@@ -41,8 +41,8 @@
       "default": "2.5%"
     },
     "quiz": {
-      "model": "quiz",
-      "via": "questions"
+      "via": "questions",
+      "model": "quiz"
     },
     "answer_metrics": {
       "type": "dynamiczone",
