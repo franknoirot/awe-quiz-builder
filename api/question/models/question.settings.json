@@ -41,19 +41,20 @@
       "default": "2.5%"
     },
     "quiz": {
-      "model": "quiz",
-      "via": "questions"
-    },
-    "answer_metrics": {
-      "type": "dynamiczone",
-      "components": [
-        "metrics.myers-briggs-answers",
-        "metrics.charity"
-      ]
+      "via": "questions",
+      "model": "quiz"
     },
     "image_aspect_ratio": {
       "type": "string",
       "default": "100%"
+    },
+    "answer_metrics": {
+      "type": "dynamiczone",
+      "components": [
+        "metrics.charity",
+        "metrics.myers-briggs-answers"
+      ],
+      "max": 1
     }
   }
 }

@@ -18,16 +18,8 @@
       "type": "richtext"
     },
     "quiz": {
-      "model": "quiz",
-      "via": "results"
-    },
-    "style_tip": {
-      "type": "component",
-      "repeatable": true,
-      "component": "results.style-tip",
-      "max": 3,
-      "min": 3,
-      "required": true
+      "via": "results",
+      "model": "quiz"
     }
   }
 }

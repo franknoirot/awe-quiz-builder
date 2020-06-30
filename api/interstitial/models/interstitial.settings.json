@@ -32,16 +32,8 @@
       "default": "fade"
     },
     "quiz": {
-      "model": "quiz",
-      "via": "interstitials"
-    },
-    "position": {
-      "type": "dynamiczone",
-      "components": [
-        "interstitial.relative-to-question",
-        "interstitial.absolute"
-      ],
-      "max": 1
+      "via": "interstitials",
+      "model": "quiz"
     },
     "slug": {
       "type": "string",
