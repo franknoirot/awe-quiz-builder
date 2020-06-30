@@ -32,8 +32,8 @@
       "default": "fade"
     },
     "quiz": {
-      "model": "quiz",
-      "via": "interstitials"
+      "via": "interstitials",
+      "model": "quiz"
     },
     "slug": {
       "type": "string",

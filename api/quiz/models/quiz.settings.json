@@ -19,17 +19,17 @@
       "via": "quiz"
     },
     "results": {
-      "via": "quiz",
-      "collection": "result"
+      "collection": "result",
+      "via": "quiz"
     },
     "interstitials": {
-      "via": "quiz",
-      "collection": "interstitial"
+      "collection": "interstitial",
+      "via": "quiz"
     },
     "results_metrics": {
       "type": "component",
       "repeatable": false,
-      "component": "metrics.myers-briggs-answers",
+      "component": "metrics.myers-briggs-results",
       "required": true
     },
     "custom_styles": {
