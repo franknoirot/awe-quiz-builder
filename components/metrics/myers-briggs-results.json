@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_metrics_myers_briggs_results",
+  "info": {
+    "name": "myers_briggs_results",
+    "icon": "balance-scale-right"
+  },
+  "options": {},
+  "attributes": {
+    "mind": {
+      "collection": "result"
+    },
+    "energy": {
+      "collection": "result"
+    },
+    "nature": {
+      "collection": "result"
+    },
+    "tactics": {
+      "collection": "result"
+    },
+    "identity": {
+      "collection": "result"
+    }
+  }
+}

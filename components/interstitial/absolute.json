@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_interstitial_absolutes",
+  "info": {
+    "name": "Absolute",
+    "icon": "asterisk"
+  },
+  "options": {},
+  "attributes": {
+    "slot": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    }
+  }
+}

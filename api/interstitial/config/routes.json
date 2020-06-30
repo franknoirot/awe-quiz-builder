@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/interstitials",
+      "handler": "interstitial.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/interstitials/count",
+      "handler": "interstitial.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/interstitials/:id",
+      "handler": "interstitial.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/interstitials",
+      "handler": "interstitial.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/interstitials/:id",
+      "handler": "interstitial.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/interstitials/:id",
+      "handler": "interstitial.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
