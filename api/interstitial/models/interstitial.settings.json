@@ -32,14 +32,22 @@
       "default": "fade"
     },
     "quiz": {
-      "via": "interstitials",
-      "model": "quiz"
+      "model": "quiz",
+      "via": "interstitials"
     },
     "slug": {
       "type": "string",
       "regex": "[\\w\\d-]",
       "required": true,
       "unique": true
+    },
+    "location": {
+      "type": "dynamiczone",
+      "components": [
+        "interstitial.absolute",
+        "interstitial.relative-to-question"
+      ],
+      "max": 1
     }
   }
 }

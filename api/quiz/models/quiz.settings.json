@@ -19,12 +19,12 @@
       "via": "quiz"
     },
     "results": {
-      "collection": "result",
-      "via": "quiz"
+      "via": "quiz",
+      "collection": "result"
     },
     "interstitials": {
-      "collection": "interstitial",
-      "via": "quiz"
+      "via": "quiz",
+      "collection": "interstitial"
     },
     "results_metrics": {
       "type": "component",

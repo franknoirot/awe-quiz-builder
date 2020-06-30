@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_result_style_tips",
+  "info": {
+    "name": "style_tip",
+    "icon": "eye"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}
