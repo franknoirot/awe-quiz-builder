@@ -15,8 +15,8 @@
       "unique": true
     },
     "questions": {
-      "collection": "question",
-      "via": "quiz"
+      "via": "quiz",
+      "collection": "question"
     },
     "results": {
       "collection": "result",

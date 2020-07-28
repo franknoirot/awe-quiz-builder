@@ -41,8 +41,8 @@
       "default": "2.5%"
     },
     "quiz": {
-      "via": "questions",
-      "model": "quiz"
+      "model": "quiz",
+      "via": "questions"
     },
     "image_aspect_ratio": {
       "type": "string",
@@ -54,7 +54,7 @@
         "metrics.charity",
         "metrics.myers-briggs-answers"
       ],
-      "max": 1
+      "required": true
     }
   }
 }
