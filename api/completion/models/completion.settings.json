@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "completions",
+  "info": {
+    "name": "Completion"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "quiz": {
+      "model": "quiz"
+    },
+    "results": {
+      "collection": "result"
+    }
+  }
+}

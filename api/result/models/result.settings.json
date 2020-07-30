@@ -18,8 +18,8 @@
       "type": "richtext"
     },
     "quiz": {
-      "via": "results",
-      "model": "quiz"
+      "model": "quiz",
+      "via": "results"
     },
     "style_tip": {
       "type": "component",
@@ -28,6 +28,10 @@
       "max": 3,
       "min": 3,
       "required": true
+    },
+    "theme_song": {
+      "type": "string",
+      "required": false
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_result_quiz_result_relations",
+  "info": {
+    "name": "quiz_result_relation",
+    "icon": "exchange-alt"
+  },
+  "options": {},
+  "attributes": {
+    "quiz": {
+      "model": "quiz"
+    },
+    "result": {
+      "model": "result"
+    }
+  }
+}
