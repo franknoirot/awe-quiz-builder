@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_result_products",
+  "info": {
+    "name": "product",
+    "icon": "dollar-sign"
+  },
+  "options": {},
+  "attributes": {
+    "product": {
+      "model": "product"
+    }
+  }
+}

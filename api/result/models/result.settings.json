@@ -32,6 +32,20 @@
     "theme_song": {
       "type": "string",
       "required": false
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "product": {
+      "type": "component",
+      "repeatable": true,
+      "component": "result.product"
     }
   }
 }

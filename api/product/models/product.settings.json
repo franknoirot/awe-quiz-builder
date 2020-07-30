@@ -31,11 +31,6 @@
       ],
       "plugin": "upload",
       "required": false
-    },
-    "quiz_result_relation": {
-      "type": "component",
-      "repeatable": true,
-      "component": "result.quiz-result-relation"
     }
   }
 }
