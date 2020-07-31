@@ -19,8 +19,8 @@
       "via": "quiz"
     },
     "results": {
-      "collection": "result",
-      "via": "quiz"
+      "via": "quiz",
+      "collection": "result"
     },
     "interstitials": {
       "collection": "interstitial",
@@ -36,11 +36,6 @@
       "type": "component",
       "repeatable": true,
       "component": "styling.style-rule"
-    },
-    "product_slot": {
-      "type": "component",
-      "repeatable": true,
-      "component": "quiz.product-slot"
     }
   }
 }

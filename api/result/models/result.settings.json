@@ -18,8 +18,8 @@
       "type": "richtext"
     },
     "quiz": {
-      "via": "results",
-      "model": "quiz"
+      "model": "quiz",
+      "via": "results"
     },
     "style_tip": {
       "type": "component",
@@ -42,10 +42,20 @@
       "plugin": "upload",
       "required": false
     },
-    "product": {
-      "type": "component",
-      "repeatable": true,
-      "component": "result.product"
+    "product_A": {
+      "model": "product"
+    },
+    "product_B": {
+      "model": "product"
+    },
+    "product_C": {
+      "model": "product"
+    },
+    "product_D": {
+      "model": "product"
+    },
+    "product_E": {
+      "model": "product"
     }
   }
 }
