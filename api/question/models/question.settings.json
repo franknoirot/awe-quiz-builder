@@ -41,8 +41,8 @@
       "default": "2.5%"
     },
     "quiz": {
-      "model": "quiz",
-      "via": "questions"
+      "via": "questions",
+      "model": "quiz"
     },
     "image_aspect_ratio": {
       "type": "string",

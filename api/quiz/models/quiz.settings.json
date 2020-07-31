@@ -15,12 +15,12 @@
       "unique": true
     },
     "questions": {
-      "via": "quiz",
-      "collection": "question"
+      "collection": "question",
+      "via": "quiz"
     },
     "results": {
-      "via": "quiz",
-      "collection": "result"
+      "collection": "result",
+      "via": "quiz"
     },
     "interstitials": {
       "collection": "interstitial",
@@ -36,6 +36,11 @@
       "type": "component",
       "repeatable": true,
       "component": "styling.style-rule"
+    },
+    "product_slot": {
+      "type": "component",
+      "repeatable": true,
+      "component": "quiz.product-slot"
     }
   }
 }

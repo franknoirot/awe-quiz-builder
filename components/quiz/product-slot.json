@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_quiz_product_slots",
+  "info": {
+    "name": "product_slot",
+    "icon": "dolly"
+  },
+  "options": {},
+  "attributes": {
+    "product_type": {
+      "type": "enumeration",
+      "enum": [
+        "coin_necklace",
+        "earrings",
+        "bracelet",
+        "charm_necklace"
+      ]
+    }
+  }
+}
