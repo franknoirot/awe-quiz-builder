@@ -8,6 +8,15 @@
   "attributes": {
     "product": {
       "model": "product"
+    },
+    "product_type": {
+      "type": "enumeration",
+      "enum": [
+        "coin_necklace",
+        "earrings",
+        "bracelets",
+        "charm_necklace"
+      ]
     }
   }
 }
