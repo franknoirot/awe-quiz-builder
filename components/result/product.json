@@ -14,7 +14,7 @@
       "enum": [
         "coin_necklace",
         "earrings",
-        "bracelets",
+        "bracelet",
         "charm_necklace"
       ]
     }
