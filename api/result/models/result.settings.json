@@ -18,8 +18,8 @@
       "type": "richtext"
     },
     "quiz": {
-      "model": "quiz",
-      "via": "results"
+      "via": "results",
+      "model": "quiz"
     },
     "style_tip": {
       "type": "component",

@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promotions",
+  "info": {
+    "name": "Promotion"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "link_text": {
+      "type": "string",
+      "required": true,
+      "maxLength": 20
+    },
+    "link_url": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
