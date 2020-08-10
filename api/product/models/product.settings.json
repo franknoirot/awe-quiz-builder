@@ -34,6 +34,9 @@
     },
     "tagline": {
       "type": "string"
+    },
+    "available_in": {
+      "type": "richtext"
     }
   }
 }

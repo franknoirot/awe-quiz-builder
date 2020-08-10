@@ -58,6 +58,11 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "image_width": {
+      "type": "string",
+      "default": "100%",
+      "required": true
     }
   }
 }
