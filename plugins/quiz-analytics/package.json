@@ -1,0 +1,28 @@
+{
+  "name": "strapi-plugin-quiz-analytics",
+  "version": "0.0.0",
+  "description": "A tool to balance quizzes created within Strapi.",
+  "strapi": {
+    "name": "Quiz Analytics & Balancer",
+    "icon": "balance-scale",
+    "description": "Description of quiz-analytics plugin."
+  },
+  "dependencies": {},
+  "author": {
+    "name": "Frank Noirot",
+    "email": "frank@netamorphosis.com",
+    "url": ""
+  },
+  "maintainers": [
+    {
+      "name": "A Strapi developer",
+      "email": "",
+      "url": ""
+    }
+  ],
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}

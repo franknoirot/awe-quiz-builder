@@ -18,6 +18,12 @@
     },
     "results": {
       "collection": "result"
+    },
+    "products": {
+      "collection": "product"
+    },
+    "personality": {
+      "type": "json"
     }
   }
 }

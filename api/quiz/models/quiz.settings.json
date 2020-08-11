@@ -23,8 +23,8 @@
       "via": "quiz"
     },
     "interstitials": {
-      "via": "quiz",
-      "collection": "interstitial"
+      "collection": "interstitial",
+      "via": "quiz"
     },
     "results_metrics": {
       "type": "component",
@@ -39,6 +39,9 @@
     },
     "promotions": {
       "collection": "promotion"
+    },
+    "email_signup_content": {
+      "type": "richtext"
     }
   }
 }
