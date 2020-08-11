@@ -32,8 +32,8 @@
       "default": "fade"
     },
     "quiz": {
-      "via": "interstitials",
-      "model": "quiz"
+      "model": "quiz",
+      "via": "interstitials"
     },
     "slug": {
       "type": "string",
@@ -63,6 +63,10 @@
       "type": "string",
       "default": "100%",
       "required": true
+    },
+    "min_image_width": {
+      "type": "string",
+      "default": "150px"
     }
   }
 }
