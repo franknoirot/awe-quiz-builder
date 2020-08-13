@@ -2,10 +2,11 @@ import blankPersonality from './blankPersonality'
 import deleteProps from './deleteProps'
 
 // Prototype of balance analytics testing
-export default function analyzeQuiz(quizObj) {
+export function quizStatistics(quizObj) {
     const analyticsObj = {}
   
     const questions = quizObj.questions.filter(q => q.slug.includes('q/'))
+    // convert questions to array of arrays with just the first metric
     const answerValArr = questions.map(q => q.answers.map(a => a.answer_metrics[0][Object.keys(a.answer_metrics[0])[0]]))
 
     const numPermutations = questions.map(q => q.answers.length)
@@ -28,32 +29,16 @@ export default function analyzeQuiz(quizObj) {
     }
 
     analyticsObj.sampledMetrics.stdDeviation = stdDeviation(analyticsObj.sampledMetrics.possibleScores)
-
-    // analyticsObj.iterativeMetrics = iterativePermutations(
-    //   questions.map(q => q.answers.map(a => deleteProps(a.answer_metrics[0], '__component'))),
-    //   30,
-    //   quizObj.results.map(({result_name, result_metrics}, i) => { return { result_name, result_metrics, count: 0, index: i } })
-    // )
   
     return analyticsObj
 }
 
 function sampleMetrics({ answerMetricsArr, sampleSize }) {
-  let permutations = []
   let scores = []
-  const permutationIsUsed = permA => (permutations.length > 1) && permutations.some(permB => permB.every((val, i) => val === permA[i]))
-  const questionAnswerMaxes = answerMetricsArr.map(q => q.length)
-  const generatePerm = () => {
-    let perm = [], k = 0
-    do {
-      perm = questionAnswerMaxes.map((max, i) => answerMetricsArr[i][Math.floor(Math.random()*max)])
-      k++
-    } while (permutationIsUsed(perm))
-    return perm
-  }
+  let permutations = []
 
   for (let i=0; i<sampleSize; i++) {
-    const currPerm = generatePerm()
+    const currPerm = generateValidPerm(answerMetricsArr, permutations)
     
     permutations = [...permutations, currPerm]
     scores = [...scores, currPerm.reduce((acc, val) => acc + val, 0) / currPerm.length] 
@@ -61,30 +46,81 @@ function sampleMetrics({ answerMetricsArr, sampleSize }) {
 
   return { sampledPermutations: permutations, possibleScores: scores, calculatedMean: mean(scores) }
 }
+
+function generateValidPerm(aMetricsArray, permutations) {
+  const permutationIsUsed = permA => (permutations.length > 1) && permutations.some(permB => permB.every((val, i) => val === permA[i]))
+  let perm, indices, k = 0
+  do {
+    [perm, indices] = generatePerm(aMetricsArray)
+    k++
+  } while (permutationIsUsed(perm))
+  return [perm, indices]
+}
+
+function generatePerm(metricArray) {
+  const indices = metricArray.map(q => Math.floor(Math.random()*q.length))
+  return [metricArray.map((q,i) => q[indices[i]]), indices]
+}
   
+export function findPermutations(quizObj, maxIterations) {
+  const questions = quizObj.questions.filter(q => q.slug.includes('q/'))
+  const qnaArr = questions.map(q => q.answers.map(a => deleteProps(a.answer_metrics[0], '__component')))
+  const resultsArr = quizObj.results.map(({result_name, result_metrics}, i) => { return { result_name, result_metrics, found: false } })
+  let iterations = 0, permutations = []
+  let currPerm, currPermIndices
+
+  while (iterations < maxIterations && !resultsArr.every(result => result.found)) {
+    [currPerm, currPermIndices] = generateValidPerm(qnaArr, permutations)
+
+    permutations = [...permutations, currPerm]
+    
+    const permScore = permutationToScore(currPerm)
+    console.log('sorting results by this score', permScore)
+    const sortedResults = scoreToResults(permScore, resultsArr)
+    const topResult = sortedResults[0]
+    console.log(topResult.result_name, 'is top!', sortedResults)
+    
+    if (topResult) {
+      topResult.found = true
+      topResult.permutationAnswers = currPermIndices.map(index => String.fromCharCode(65 + index))
+      topResult.permutationMetrics = currPerm
+      topResult.permutationScore = permScore
+    }
+
+    iterations++
+  }
+
+  return {triedPermutations: permutations, resultsArr}
+}
+
+function permutationToScore(permutation) {
+  const blank = blankPersonality(permutation[0])
+  return permutation.reduce((acc, val) => sumObjectsByKeys(acc, val, permutation.length), blank)
+}
+
+function scoreToResults(permScore, resultsArr) {
+  return resultsArr.sort((a,b) => {
+    const diffA =  Math.abs(personalityDistSum(permScore, a.result_metrics[0]))
+    const diffB = Math.abs(personalityDistSum(permScore, b.result_metrics[0]))
+    console.log(`${ a.result_name } (${diffA}) is ${ (diffA < diffB ) ? 'nearer' : 'farther' } than ${ b.result_name } (${diffB})`)
+    return (diffA < diffB) ? -1 : 1
+  })
+}
+
+function permutationToResults(permutation, resultsArr) {
+  return scoreToResults(permutationToScore(permutation), resultsArr)
+}
+
+
 function iterativePermutations(qnaArray, numPermutations, resultArray) {
-    const blank = deleteProps(blankPersonality(qnaArray[0][0]), ['__component'])
-    // const heatmapObj = Object.assign({}, blank)
+    const blank = deleteProps(blankPersonality(qnaArray[0][0]))
     const questionAnswerMaxes = qnaArray.map((q,i) => q.length)
     let questionAnswerIndices = qnaArray.map(_ => 0)
 
 
     for (let i=0; i < numPermutations; i++) {
         // run the permutation using questionAnswerIndices as our answers choices.
-        const currPerm = questionAnswerIndices
-          .map((aIndex, qIndex) => {
-              return qnaArray[qIndex][aIndex]
-          })
-          .reduce((acc, val) => {
-              if (val.__component === 'metrics.charity') return acc
-              return sumObjectsByKeys(acc, deleteProps(val, ['__component']), qnaArray.length)
-          }, blank)
-
-        const sortedResults = resultArray.sort((a,b) => {
-          const diffA =  Math.abs(personalityDistSum(currPerm, deleteProps(a.result_metrics[0], ['__component'])))
-          const diffB = Math.abs(personalityDistSum(currPerm, deleteProps(b.result_metrics[0],  ['__component'])))
-          return (diffA < diffB) ? -1 : 1
-        })
+        const sortedResults = permutationToResults(questionAnswerIndices, resultArray)
 
         resultArray[sortedResults[0].index].count++
 

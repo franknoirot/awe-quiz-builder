@@ -11,7 +11,7 @@
   "attributes": {
     "email": {
       "type": "email",
-      "required": true
+      "required": false
     },
     "quiz": {
       "model": "quiz"

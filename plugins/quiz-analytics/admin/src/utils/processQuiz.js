@@ -1,6 +1,6 @@
 import { request } from 'strapi-helper-plugin';
 import preprocessQuiz from './preprocessQuiz';
-import analyzeQuiz from './analyzeQuiz';
+import { quizStatistics, findPermutations } from './analyzeQuiz';
 
 
 async function processQuiz({ backendURL, id}) {
@@ -10,7 +10,9 @@ async function processQuiz({ backendURL, id}) {
         
     const processedQuiz = preprocessQuiz(quiz, questions, results)
 
-    processedQuiz.analytics = analyzeQuiz(processedQuiz)
+    processedQuiz.statistics = quizStatistics(processedQuiz)
+
+    processedQuiz.resultPermutations = findPermutations(processedQuiz, 200)
 
     console.log('quiz processed!', processedQuiz)
 

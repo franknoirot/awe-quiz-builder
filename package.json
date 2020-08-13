@@ -12,6 +12,7 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "jstat": "^1.9.3",
     "strapi": "3.0.2",
     "strapi-admin": "3.0.2",
     "strapi-connector-mongoose": "3.0.2",

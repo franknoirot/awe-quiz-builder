@@ -1,4 +1,5 @@
 import blankPersonality from './blankPersonality';
+const { jStat } = require('jstat')
 import deleteProps from './deleteProps';
 
 function preprocessQuiz(quizObj, questionObj, results) {
@@ -6,8 +7,8 @@ function preprocessQuiz(quizObj, questionObj, results) {
   
     // Sort by the number within the Label field of Questions until Strapi Issue #2616 results in a feature upgrade
     // https://github.com/strapi/strapi/issues/2616 (Relation fields do no repect drag-and-drop order)
-    const qIndexFromLabel = (label) => parseInt(label.match(/\d+/g)[0])
-    quizObj.questions = quizObj.questions.sort((qA, qB) => (qIndexFromLabel(qA.label) < qIndexFromLabel(qB.label)) ? -1 : 1)
+    const indexFromLabel = (label) => parseInt(label.match(/\d+/g)[0])
+    quizObj.questions = quizObj.questions.sort((qA, qB) => (indexFromLabel(qA.label) < indexFromLabel(qB.label)) ? -1 : 1)
   
     quizObj.questions.forEach(q => { 
       //preformat question uris
@@ -15,6 +16,10 @@ function preprocessQuiz(quizObj, questionObj, results) {
   
       // merge in answers to quiz's question data
       q.answers = questionObj.find(question => question.id === q.id).answers
+
+      // Sort answers by numbers within Label field of Answers until Strapi Issue #2616 results in a feature upgrade
+      // (Relation fields do not respect drag-and-drop ordering, default to ordering by Date Created which is dumb)
+      q.answers = q.answers.sort((answerA, answerB) => (indexFromLabel(answerA.label) < indexFromLabel(answerB.label)) ? -1 : 1)
   
       q.answers.forEach(a => a.answer_metrics = [{}])
   
@@ -62,8 +67,7 @@ function preprocessQuiz(quizObj, questionObj, results) {
   
     Object.keys(quizObj.results_metrics).forEach(key => {
       quizObj.results_metrics[key].forEach((item, i, arr) => {
-        const val = -1 + i * 2 / (arr.length - 1)
-        item.value = val
+        item.value = orderToMetricValue(i, arr, (item.stdev) ? item.stdev : 0.224, (item.mean) ? item.mean : 0)
       })
     })
   
@@ -141,5 +145,14 @@ function preprocessQuiz(quizObj, questionObj, results) {
       ]
     )
   }
+
+function orderToMetricValue(i, arr, stdev, mean) {
+  const min = -1, max = 1, range = max - min
+  // this gives me a value between -1 and 1 with even spacing between
+  const evenSpacing = (min + range / arr.length / 2 + (i * range) / arr.length)
+
+  // adjust for a normal distribution by multiplying by the CDF mirrored over the Y-axis
+  return evenSpacing * jStat.normal.cdf(Math.abs(evenSpacing), mean, stdev) + mean
+}
 
   export default preprocessQuiz;
