@@ -11,7 +11,7 @@
   "attributes": {
     "email": {
       "type": "email",
-      "required": false
+      "required": true
     },
     "quiz": {
       "model": "quiz"
@@ -23,7 +23,8 @@
       "collection": "product"
     },
     "personality": {
-      "type": "json"
+      "type": "json",
+      "required": true
     }
   }
 }

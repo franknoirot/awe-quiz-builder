@@ -102,7 +102,6 @@ function scoreToResults(permScore, resultsArr) {
   return resultsArr.sort((a,b) => {
     const diffA =  Math.abs(personalityDistSum(permScore, a.result_metrics[0]))
     const diffB = Math.abs(personalityDistSum(permScore, b.result_metrics[0]))
-    console.log(`${ a.result_name } (${diffA}) is ${ (diffA < diffB ) ? 'nearer' : 'farther' } than ${ b.result_name } (${diffB})`)
     return (diffA < diffB) ? -1 : 1
   })
 }
