@@ -38,7 +38,7 @@ function sampleMetrics({ answerMetricsArr, sampleSize }) {
   let permutations = []
 
   for (let i=0; i<sampleSize; i++) {
-    const currPerm = generateValidPerm(answerMetricsArr, permutations)
+    const currPerm = generateValidPerm(answerMetricsArr, permutations)[0]
     
     permutations = [...permutations, currPerm]
     scores = [...scores, currPerm.reduce((acc, val) => acc + val, 0) / currPerm.length] 
