@@ -12,7 +12,7 @@ async function processQuiz({ backendURL, id}) {
 
     processedQuiz.statistics = quizStatistics(processedQuiz)
 
-    processedQuiz.resultPermutations = findPermutations(processedQuiz, 200)
+    processedQuiz.resultPermutations = findPermutations(processedQuiz, 1000)
 
     console.log('quiz processed!', processedQuiz)
 

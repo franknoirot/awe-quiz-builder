@@ -5,7 +5,7 @@
  */
 
 import React, { memo, useState, useEffect, useRef } from 'react';
-import { Select, List } from '@buffetjs/core';
+import { Select, List, Table } from '@buffetjs/core';
 import { LoadingBar } from '@buffetjs/styles';
 import { Header } from '@buffetjs/custom';
 // import PropTypes from 'prop-types';
@@ -26,6 +26,12 @@ const HomePage = () => {
   const [quizProcessState, setQuizProcessState] = useState('not loaded');
   let resultPermRows
 
+  const tableHeaders = [
+    { name: 'Result', value: 'result_name', isSortEnabled: true },
+    { name: '1st Place', value: '1', isSortEnabled: true },
+    { name: '2nd Place', value: '2', isSortEnabled: true },
+    { name: '3rd Place', value: '3', isSortEnabled: true },
+  ]
 
   useEffect(() => {
     // cleanup function to fix unmount warning for async code
@@ -89,6 +95,10 @@ const HomePage = () => {
               if (!found) { return starterObj }
               return Object.assign(starterObj, Object.fromEntries(permutationAnswers.map((perm, i) => ['Q'+(i+1), perm])))
             }).sort((a,b) => (a.result_name < b.result_name) ? -1 : 1) }/>
+        <Header title={{ label: 'Sampled Top 3 Goddess Scores' }} content='Number of times each goddess appeared in each of the top three slots during random sampling' />
+        <Table headers={ tableHeaders } rows={ currQuizProcessed.resultPermutations.resultsArr.map(result => {
+          return { result_name: result.result_name, '1': result['1'], '2': result['2'], '3': result['3'] }
+        }).sort((a,b) => (a.result_name < b.result_name) ? -1 : 1)  } />
       </>) }
         
     </Container>

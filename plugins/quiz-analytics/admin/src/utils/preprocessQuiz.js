@@ -152,7 +152,8 @@ function orderToMetricValue(i, arr, stdev, mean) {
   const evenSpacing = (min + range / arr.length / 2 + (i * range) / arr.length)
 
   // adjust for a normal distribution by multiplying by the CDF mirrored over the Y-axis
-  return evenSpacing * jStat.normal.cdf(Math.abs(evenSpacing), mean, stdev) + mean
+  // return evenSpacing * jStat.normal.cdf(Math.abs(evenSpacing), mean, stdev) + mean
+  return evenSpacing
 }
 
   export default preprocessQuiz;

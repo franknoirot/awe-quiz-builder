@@ -11,7 +11,7 @@ export function quizStatistics(quizObj) {
 
     const numPermutations = questions.map(q => q.answers.length)
       .reduce((acc, val) => acc * val, 1)
-    const sampleRatio = .1, minSamples = 250, maxSamples = 1000;
+    const sampleRatio = .1, minSamples = 250, maxSamples = 1500;
     const randSampleSize = Math.min(Math.max(numPermutations * sampleRatio, Math.min(numPermutations, minSamples)), maxSamples);
     const actualSampleRatio = randSampleSize / numPermutations;
     console.log('randSampleSize', randSampleSize)
@@ -44,6 +44,7 @@ function sampleMetrics({ answerMetricsArr, sampleSize }) {
     scores = [...scores, currPerm.reduce((acc, val) => acc + val, 0) / currPerm.length] 
   }
 
+  
   return { sampledPermutations: permutations, possibleScores: scores, calculatedMean: mean(scores) }
 }
 
@@ -61,25 +62,38 @@ function generatePerm(metricArray) {
   const indices = metricArray.map(q => Math.floor(Math.random()*q.length))
   return [metricArray.map((q,i) => q[indices[i]]), indices]
 }
+
+
   
 export function findPermutations(quizObj, maxIterations) {
   const questions = quizObj.questions.filter(q => q.slug.includes('q/'))
   const qnaArr = questions.map(q => q.answers.map(a => deleteProps(a.answer_metrics[0], '__component')))
-  const resultsArr = quizObj.results.map(({result_name, result_metrics}, i) => { return { result_name, result_metrics, found: false } })
+  const resultsArr = quizObj.results.map(({result_name, result_metrics}, i) => {
+    return {
+      result_name,
+      result_metrics,
+      found: false,
+      '1':0,
+      '2':0,
+      '3':0,
+    }
+  })
   let iterations = 0, permutations = []
   let currPerm, currPermIndices
 
-  while (iterations < maxIterations && !resultsArr.every(result => result.found)) {
+  while (iterations < maxIterations) {
     [currPerm, currPermIndices] = generateValidPerm(qnaArr, permutations)
 
     permutations = [...permutations, currPerm]
     
     const permScore = permutationToScore(currPerm)
-    console.log('sorting results by this score', permScore)
     const sortedResults = scoreToResults(permScore, resultsArr)
     const topResult = sortedResults[0]
-    console.log(topResult.result_name, 'is top!', sortedResults)
     
+    sortedResults.slice(0,3).forEach((result, i) => {
+      resultsArr.find(res => res.result_name === result.result_name)[i+1]++
+    })
+
     if (topResult) {
       topResult.found = true
       topResult.permutationAnswers = currPermIndices.map(index => String.fromCharCode(65 + index))
