@@ -31,6 +31,7 @@ const HomePage = () => {
     { name: '1st Place', value: '1', isSortEnabled: true },
     { name: '2nd Place', value: '2', isSortEnabled: true },
     { name: '3rd Place', value: '3', isSortEnabled: true },
+    { name: 'Total Appearances', value: 'sum' },
   ]
 
   useEffect(() => {
@@ -97,7 +98,7 @@ const HomePage = () => {
             }).sort((a,b) => (a.result_name < b.result_name) ? -1 : 1) }/>
         <Header title={{ label: 'Sampled Top 3 Goddess Scores' }} content='Number of times each goddess appeared in each of the top three slots during random sampling' />
         <Table headers={ tableHeaders } rows={ currQuizProcessed.resultPermutations.resultsArr.map(result => {
-          return { result_name: result.result_name, '1': result['1'], '2': result['2'], '3': result['3'] }
+          return { result_name: result.result_name, '1': result['1'], '2': result['2'], '3': result['3'], sum: result['1']+result['2']+result['3'] }
         }).sort((a,b) => (a.result_name < b.result_name) ? -1 : 1)  } />
       </>) }
         

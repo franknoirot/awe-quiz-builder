@@ -64,10 +64,18 @@ function preprocessQuiz(quizObj, questionObj, results) {
     //preprocess results_metrics
     const rmPropsToDelete = ['id', '_id', '__component', 'createdAt', 'updatedAt', '__v']
     quizObj.results_metrics = deleteProps(quizObj.results_metrics, rmPropsToDelete)
-  
+    
+    const quizStatVals = {
+      energy: { mean: 0.0067, stdev: 0.266 },
+      mind: { mean: -0.0062, stdev: 0.248 },
+      identity: { mean: 0.0148, stdev: 0.252 },
+      nature: { mean: 0.0028, stdev: 0.252 },
+      tactics: { mean: 0.0062, stdev: 0.254 },
+    }
+
     Object.keys(quizObj.results_metrics).forEach(key => {
       quizObj.results_metrics[key].forEach((item, i, arr) => {
-        item.value = orderToMetricValue(i, arr, (item.stdev) ? item.stdev : 0.224, (item.mean) ? item.mean : 0)
+        item.value = orderToMetricValue(i, arr, (quizStatVals[key].stdev) ? quizStatVals[key].stdev*2 : .45, (quizStatVals[key].mean) ? quizStatVals[key].mean : 0)
       })
     })
   
@@ -150,9 +158,16 @@ function orderToMetricValue(i, arr, stdev, mean) {
   const min = -1, max = 1, range = max - min
   // this gives me a value between -1 and 1 with even spacing between
   const evenSpacing = (min + range / arr.length / 2 + (i * range) / arr.length)
+  // const evenSpacing = -1 + i * 2 / (arr.length - 1)
 
   // adjust for a normal distribution by multiplying by the CDF mirrored over the Y-axis
-  // return evenSpacing * jStat.normal.cdf(Math.abs(evenSpacing), mean, stdev) + mean
+  // return evenSpacingjStat.normal.cdf(evenSpacing, mean, stdev) + mean, 1) * stdev + mean
+  // return evenSpacing * Math.pow(jStat.normal.cdf(Math.abs(evenSpacing), mean, stdev) + mean, 1)
+  if (i === 0) { return min }
+  else if (i === arr.length-1) { return max }
+  else {
+    return jStat.normal.inv((i+1) / arr.length - 1 / 2 / arr.length, mean, stdev) * stdev + mean
+  }
   return evenSpacing
 }
 

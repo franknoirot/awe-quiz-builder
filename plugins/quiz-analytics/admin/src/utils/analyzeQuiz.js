@@ -7,14 +7,13 @@ export function quizStatistics(quizObj) {
   
     const questions = quizObj.questions.filter(q => q.slug.includes('q/'))
     // convert questions to array of arrays with just the first metric
-    const answerValArr = questions.map(q => q.answers.map(a => a.answer_metrics[0][Object.keys(a.answer_metrics[0])[0]]))
+    const answerValArr = questions.map(q => q.answers.map(a => a.answer_metrics[0].mind))
 
     const numPermutations = questions.map(q => q.answers.length)
       .reduce((acc, val) => acc * val, 1)
-    const sampleRatio = .1, minSamples = 250, maxSamples = 1500;
+    const sampleRatio = .1, minSamples = 250, maxSamples = 1000;
     const randSampleSize = Math.min(Math.max(numPermutations * sampleRatio, Math.min(numPermutations, minSamples)), maxSamples);
     const actualSampleRatio = randSampleSize / numPermutations;
-    console.log('randSampleSize', randSampleSize)
 
     analyticsObj.sampledMetrics = {
       questions: questions.length,
