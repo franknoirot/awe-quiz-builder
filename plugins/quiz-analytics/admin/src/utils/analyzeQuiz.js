@@ -87,13 +87,13 @@ export function findPermutations(quizObj, maxIterations) {
     
     const permScore = permutationToScore(currPerm)
     const sortedResults = scoreToResults(permScore, resultsArr)
-    const topResult = sortedResults[0]
+    const topResult = resultsArr.find(res => res.result_name === sortedResults[0].result_name)
     
     sortedResults.slice(0,3).forEach((result, i) => {
       resultsArr.find(res => res.result_name === result.result_name)[i+1]++
     })
 
-    if (topResult) {
+    if (topResult && !topResult.found) {
       topResult.found = true
       topResult.permutationAnswers = currPermIndices.map(index => String.fromCharCode(65 + index))
       topResult.permutationMetrics = currPerm
