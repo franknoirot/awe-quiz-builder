@@ -18,8 +18,8 @@
       "type": "richtext"
     },
     "quiz": {
-      "via": "results",
-      "model": "quiz"
+      "model": "quiz",
+      "via": "results"
     },
     "style_tip": {
       "type": "component",
@@ -56,6 +56,11 @@
     },
     "product_E": {
       "model": "product"
+    },
+    "weight": {
+      "type": "decimal",
+      "default": 1,
+      "min": 0
     }
   }
 }

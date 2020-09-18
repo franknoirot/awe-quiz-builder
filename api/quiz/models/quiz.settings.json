@@ -19,8 +19,8 @@
       "via": "quiz"
     },
     "results": {
-      "collection": "result",
-      "via": "quiz"
+      "via": "quiz",
+      "collection": "result"
     },
     "interstitials": {
       "via": "quiz",
