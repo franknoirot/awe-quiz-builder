@@ -58,9 +58,10 @@
       "model": "product"
     },
     "weight": {
-      "type": "decimal",
+      "type": "float",
       "default": 1,
-      "min": 0
+      "min": 0,
+      "required": true
     }
   }
 }

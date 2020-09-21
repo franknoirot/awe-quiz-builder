@@ -73,10 +73,12 @@ function preprocessQuiz(quizObj, questionObj, results) {
       tactics: { mean: 0.0062, stdev: 0.254 },
     }
 
-    Object.keys(quizObj.results_metrics).forEach(key => {
+    Object.keys(quizObj.results_metrics).forEach((key, j) => {
+      console.group(key)
       quizObj.results_metrics[key].forEach((item, i, arr) => {
         item.value = orderToMetricValue(i, arr, (quizStatVals[key].stdev) ? quizStatVals[key].stdev*2 : .45, (quizStatVals[key].mean) ? quizStatVals[key].mean : 0)
       })
+      console.groupEnd()
     })
   
     quizObj.results.forEach(result => {
@@ -154,21 +156,35 @@ function preprocessQuiz(quizObj, questionObj, results) {
     )
   }
 
-function orderToMetricValue(i, arr, stdev, mean) {
-  const min = -1, max = 1, range = max - min
+function orderToMetricValue(i, arr) {
+  const range = (min, max) => max - min
+  const start = (min, range) => min + range / (2 * arr.length)
   // this gives me a value between -1 and 1 with even spacing between
-  const evenSpacing = (min + range / arr.length / 2 + (i * range) / arr.length)
+  const evenSpacing = start(-1, 2) + i * range(-1, 1) / arr.length
+  const evenSpacingZeroOne = start(0, 1) + i * range(0, 1) / arr.length
   // const evenSpacing = -1 + i * 2 / (arr.length - 1)
+  const mean = 0
+  const stdev = 0.6009052101
 
+  const zScore = val => (val - mean) / stdev
+  const rawScore = z => z * stdev + mean
+  const pScore = val => jStat.normal.cdf(zScore(val), mean, stdev)
+  // const probSpacing = (i+1)/(arr.length+1)
+  const evenP = jStat.normal.inv(evenSpacingZeroOne, mean, stdev / 1.95)
+  // console.log(probSpacing, evenP, rawScore(evenP), evenSpacing)
+
+  // console.group(i)
+  // console.log(evenSpacing, zScore, pScore, evenP, evenP * stdev + mean)
+  // console.groupEnd()
   // adjust for a normal distribution by multiplying by the CDF mirrored over the Y-axis
   // return evenSpacingjStat.normal.cdf(evenSpacing, mean, stdev) + mean, 1) * stdev + mean
   // return evenSpacing * Math.pow(jStat.normal.cdf(Math.abs(evenSpacing), mean, stdev) + mean, 1)
-  if (i === 0) { return min }
-  else if (i === arr.length-1) { return max }
-  else {
-    return jStat.normal.inv((i+1) / arr.length - 1 / 2 / arr.length, mean, stdev) * stdev + mean
-  }
-  return evenSpacing
+  // if (i === 0) { return min }
+  // else if (i === arr.length-1) { return max }
+  // else {
+  //   return jStat.normal.inv((i+1) / arr.length - 1 / 2 / arr.length, mean, stdev) * stdev + mean
+  // }
+  return evenP
 }
 
   export default preprocessQuiz;

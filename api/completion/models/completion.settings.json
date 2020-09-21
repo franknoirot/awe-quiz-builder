@@ -25,6 +25,9 @@
     "personality": {
       "type": "json",
       "required": true
+    },
+    "answers": {
+      "collection": "answer"
     }
   }
 }

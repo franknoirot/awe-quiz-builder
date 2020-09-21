@@ -28,10 +28,20 @@ const HomePage = () => {
 
   const tableHeaders = [
     { name: 'Result', value: 'result_name', isSortEnabled: true },
-    { name: '1st Place', value: '1', isSortEnabled: true },
-    { name: '2nd Place', value: '2', isSortEnabled: true },
-    { name: '3rd Place', value: '3', isSortEnabled: true },
-    { name: 'Total Appearances', value: 'sum' },
+    // { name: 'Rank', value: 'rank', isSortEnabled: true },
+    // { name: '1st Place', value: '1', isSortEnabled: true },
+    // { name: '1st With Weights', value: 'withWeights', isSortEnabled: true },
+    // { name: 'One Metric', value: 'oneMetric', isSortEnabled: true },
+    { name: '1st Place', value: 'oneMetricWeighted'},
+    { name: '% Share', value: 'weightsShare', isSortEnabled: true },
+    { name: 'Weight', value: 'weight', isSortEnabled: true },
+    // { name: '1st Share', value: '1share', isSortEnabled: true },
+    // // { name: 'Weighted Rank', value: 'weightedRank', isSortEnabled: true },
+    // { name: 'Diff', value: 'diff', isSortEnabled: true },
+    // { name: 'Share Diff', value: 'pctDiff', isSortEnabled: true },
+    // { name: '2nd Place', value: '2', isSortEnabled: true },
+    // { name: '3rd Place', value: '3', isSortEnabled: true },
+    // { name: 'Total Appearances', value: 'sum' },
   ]
 
   useEffect(() => {
@@ -97,8 +107,21 @@ const HomePage = () => {
               return Object.assign(starterObj, Object.fromEntries(permutationAnswers.map((perm, i) => ['Q'+(i+1), perm])))
             }).sort((a,b) => (a.result_name < b.result_name) ? -1 : 1) }/>
         <Header title={{ label: 'Sampled Top 3 Goddess Scores' }} content='Number of times each goddess appeared in each of the top three slots during random sampling' />
-        <Table headers={ tableHeaders } rows={ currQuizProcessed.resultPermutations.resultsArr.map(result => {
-          return { result_name: result.result_name, '1': result['1'], '2': result['2'], '3': result['3'], sum: result['1']+result['2']+result['3'] }
+        <Table headers={ tableHeaders } rows={ currQuizProcessed.resultPermutations.resultsArr.map((result, i, arr) => {
+          return {
+            result_name: result.result_name,
+            // 'rank': arr.sort((a,b) =>  (b['1'] - a['1'] < 0) ? -1 : 1).findIndex(res => res.result_name === result.result_name),
+            // '1': result['1'],
+            // '1share': (result['1'] / 1000 * 100).toFixed(2) + '%',
+            weight: result.weight,
+            // weightedRank: arr.sort((a,b) =>  (b['1'] - a['1'] < 0) ? -1 : 1).findIndex(res => res.result_name === result.result_name),
+            // withWeights: result.withWeights,
+            // oneMetric: result.oneMetric,
+            oneMetricWeighted: result.oneMetricWeighted,
+            weightsShare: (result.oneMetricWeighted / 1000 * 100).toFixed(2) + '%',
+            // diff: result.withWeights - result['1'],
+            // pctDiff: ((result.withWeights / result['1'] - 1) * 100).toFixed(2) + '%'
+          }
         }).sort((a,b) => (a.result_name < b.result_name) ? -1 : 1)  } />
       </>) }
         
